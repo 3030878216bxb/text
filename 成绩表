@@ -1,0 +1,48 @@
+#include<stdio.h>
+struct x
+{
+	float a,b,c,d;
+};
+struct student
+{
+	char num[4];
+	char name[4];
+	char sex;
+	struct x score;
+};
+int main()
+{
+	struct student a[30],s;
+	int i,j;
+	float b[30],t;
+	printf("请输入学生学号，姓名，性别，a科成绩，b科成绩，c科成绩，d科成绩\n");
+	for( i = 0; i < 30; i++)
+	{
+		scanf("%s %s %c %lf %lf %lf %lf",a[i].num ,a[i].name ,&a[i].sex ,&a[i].score.a ,&a[i].score.b ,&a[i].score.c ,&a[i].score.d );
+	}
+	for( i = 0; i < 30; i++)
+	{
+		b[i]=(a[i].score.a +a[i].score.b +a[i].score.c +a[i].score.d)/4;    
+	}
+	for( i = 0; i < 30; i++)
+	{
+		for( j = 0; j < 29-i; j++)
+		{
+			if( b[j] < b[j+1])
+			{
+				t = b[j];
+				b[j] = b[j+1];
+				b[j+1] = t;
+				s = a[j];
+				a[j] = a[j+1];
+				a[j+1] = s;	
+			}
+		}
+	}
+	printf("学号    姓名    性别    a科成绩  b科成绩  c科成绩  d科成绩  平均分   \n"); 
+	for( i = 0; i < 30; i++)
+	{
+		printf("%s %s %c %6lf %6lf %6lf %6lf %6lf\n",a[i].num ,a[i].name ,a[i].sex ,a[i].score.a ,a[i].score.b ,a[i].score.c ,a[i].score.d,b[i]);
+	}
+	return 0; 
+}
